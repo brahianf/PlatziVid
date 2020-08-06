@@ -1,10 +1,4 @@
 
-
-/************************************** Login  **************/
-body {
-    background-color: rgba(108, 204, 212, 0.4)
-}
-
 .login {
     background: linear-gradient(#21C08B, #0e7a56);
     display: flex;
@@ -46,24 +40,6 @@ body {
     color: white;
 }
 
-.button {
-    margin: 10px 0;
-    border: none;
-    padding: 10px;
-    width: 60%;
-    height: 50px;
-    border-radius: 30px;
-    background-color: rgba(255, 255, 255, .4);
-    font-family: 'Muli', sans-serif;
-    font-weight: bold;
-    letter-spacing: 1px;
-    cursor: pointer;
-}
-
-.button a{
-    text-decoration: none;
-    color: black;
-}
 
 .login__container--form label{
     font-size: 14px;
