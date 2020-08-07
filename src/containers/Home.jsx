@@ -7,35 +7,33 @@ import Categories from '../components/Categories.jsx'
 import Carousel from '../components/Carousel.jsx'
 import CarouselItem from '../components/CarouselItem.jsx'
 import Footer from '../components/Footer.jsx'
+import useInitialState from '../hooks/useInitialState.js'
+
+const API = 'http://localhost:3000/initialState/'
 
 const Home = () => {
-    const [ videos, setVideos ] = useState({ mylist: [], trends: [], originals: [] });
-    useEffect(() => {
-        fetch('http://localhost:3000/initalState')
-            .then(response => response.json())
-            .then(data => setVideos(data))
-    }, [])
-
-    console.log(videos.trends)
-
-    return(
+    console.log(useInitialState(API))
+    const initialState = useInitialState(API);
+    return initialState.length === 0 ? <h1> Loading...</h1> : (
         <div className="Home">
             <Header />
             <Search />
-            {videos.mylist.length > 0 && (
                 <Categories title="Mi Lista">
                     <Carousel>
-                        <CarouselItem /> 
+                    {initialState.mylist !== undefined && initialState.mylist.length > 0 && (
+                        initialState.mylist.map(item => (
+                            <CarouselItem key={item.id} {...item} />
+                        )))}
+                    )}
                     </Carousel>
                 </Categories>
-            )}
 
-            <Categories  title="Tendencias">
+            <Categories title="Tendencias">
                 <Carousel>
-                    {videos.trends.map( item => 
-                        // console.log(item);
-                        <CarouselItem key={item.id} {...item}/> 
-                    )}
+                    {initialState.trends !== undefined && initialState.trends > 0 && (
+                    initialState.trends.map(item => (
+                        <CarouselItem key={item.id} {...item} />
+                    )))}
                 </Carousel>
             </Categories>
             <Footer />
