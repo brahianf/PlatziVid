@@ -23,7 +23,7 @@ const Home = () => {
                     {initialState.mylist !== undefined && initialState.mylist.length > 0 && (
                         initialState.mylist.map(item => (
                             <CarouselItem key={item.id} {...item} />
-                        )))}
+                        ))
                     )}
                     </Carousel>
                 </Categories>
