@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { connect } from 'react-redux';
+import { Link, withRouter } from 'react-router-dom'
+import { loginRequest } from '../actions';
 
-const LoginForm = ( { children }) => {
+const LoginForm = props => {
     const [form, setValues] = useState({
         email: '',
     })
@@ -14,7 +17,9 @@ const LoginForm = ( { children }) => {
 
     const handleSubmit = event => {
         event.preventDefault();
-        console.log(form)
+        props.loginRequest(form);
+        props.history.push('/');
+        // console.log(form);
     }
 
     return (
@@ -39,10 +44,14 @@ const LoginForm = ( { children }) => {
                         onChange={handleInput}
                     />
                     <button className="button">Iniciar Sesión</button>
-                </form>
+                </form> 
             </section>
         </section>
     )
 }
 
-export default LoginForm;
+const mapDispatchToProps = {
+    loginRequest,
+}
+
+export default  withRouter(connect(null,mapDispatchToProps)(LoginForm));

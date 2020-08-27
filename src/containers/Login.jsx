@@ -12,9 +12,8 @@ const Login = () => (
     <div className="Login">
         <Header />
         <LoginContainer>
-            <LoginForm>
-                {/* <Remembered /> */}
-            </LoginForm>
+            <LoginForm/>
+            {/* <Remembered /> */}
             {/* <SocialMedia /> */}
         </LoginContainer>
         <Footer />
