@@ -9,19 +9,20 @@ import CarouselItem from '../components/CarouselItem.jsx'
 import Footer from '../components/Footer.jsx'
 import useInitialState from '../hooks/useInitialState.js'
 
-const API = 'http://localhost:3000/initialState/'
+const API = 'http://localhost:3000/initalState/'
 
 const Home = () => {
-    console.log(useInitialState(API))
+
     const initialState = useInitialState(API);
+
     return initialState.length === 0 ? <h1> Loading...</h1> : (
         <div className="Home">
             <Header />
             <Search />
                 <Categories title="Mi Lista">
                     <Carousel>
-                    {initialState.mylist !== undefined && initialState.mylist.length > 0 && (
-                        initialState.mylist.map(item => (
+                    {initialState.trends !== undefined && initialState.trends.length > 0 && (
+                        initialState.trends.map(item => (
                             <CarouselItem key={item.id} {...item} />
                         ))
                     )}
@@ -30,8 +31,8 @@ const Home = () => {
 
             <Categories title="Tendencias">
                 <Carousel>
-                    {initialState.trends !== undefined && initialState.trends > 0 && (
-                    initialState.trends.map(item => (
+                    {initialState.originals !== undefined && initialState.originals.length > 0 && (
+                    initialState.originals.map(item => (
                         <CarouselItem key={item.id} {...item} />
                     )))}
                 </Carousel>
