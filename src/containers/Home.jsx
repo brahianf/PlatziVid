@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react'
+import { connect } from 'react-redux'
 
 import '../assets/styles/Home.scss'
 import Header from '../components/Header.jsx'
@@ -9,20 +10,17 @@ import CarouselItem from '../components/CarouselItem.jsx'
 import Footer from '../components/Footer.jsx'
 import useInitialState from '../hooks/useInitialState.js'
 
-const API = 'http://localhost:3000/initalState/'
 
-const Home = () => {
+const Home = ({ trends, originals}) => {
 
-    const initialState = useInitialState(API);
-
-    return initialState.length === 0 ? <h1> Loading...</h1> : (
+    return  (
         <div className="Home">
             <Header />
             <Search />
                 <Categories title="Mi Lista">
                     <Carousel>
-                    {initialState.trends !== undefined && initialState.trends.length > 0 && (
-                        initialState.trends.map(item => (
+                    {trends !== undefined && trends.length > 0 && (
+                        trends.map(item => (
                             <CarouselItem key={item.id} {...item} />
                         ))
                     )}
@@ -31,8 +29,8 @@ const Home = () => {
 
             <Categories title="Tendencias">
                 <Carousel>
-                    {initialState.originals !== undefined && initialState.originals.length > 0 && (
-                    initialState.originals.map(item => (
+                    {originals !== undefined && originals.length > 0 && (
+                    originals.map(item => (
                         <CarouselItem key={item.id} {...item} />
                     )))}
                 </Carousel>
@@ -42,4 +40,13 @@ const Home = () => {
     )
 };
 
-export default Home;
+const mapStateToProps = state => {
+    return {
+        trends: state.trends,
+        originals: state.originals
+    }
+}
+
+// Unir aplicacion con el estado pasado con provider
+// export default connect(props, actions)(Home), mapear las acciones a ejecutar, evento a ejecutar reducer
+export default connect(mapStateToProps, null)(Home)
