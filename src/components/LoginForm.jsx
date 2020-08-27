@@ -5,7 +5,7 @@ const LoginForm = ( { children }) => (
         <h2>Inicia Sesión</h2>
         <input aria-label="Correo" className="input" type="text" placeholder="Correo"/>
         <input  aria-label="Contraseña"className="input" type="password" placeholder="Contraseña"/>
-        <button className="button"> <a href="./pages/home.html">Iniciar Sesión </a></button>
+        <button className="button"> <a href="/">Iniciar Sesión </a></button>
         {children}
     </form>
 )
