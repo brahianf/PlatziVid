@@ -11,7 +11,7 @@ import Footer from '../components/Footer.jsx'
 import useInitialState from '../hooks/useInitialState.js'
 
 
-const Home = ({ trends, originals}) => {
+const Home = ({ myList, originals}) => {
 
     return  (
         <div className="Home">
@@ -19,8 +19,8 @@ const Home = ({ trends, originals}) => {
             <Search />
                 <Categories title="Mi Lista">
                     <Carousel>
-                    {trends !== undefined && trends.length > 0 && (
-                        trends.map(item => (
+                    {myList !== undefined && myList.length > 0 && (
+                        myList.map(item => (
                             <CarouselItem key={item.id} {...item} />
                         ))
                     )}
@@ -42,7 +42,7 @@ const Home = ({ trends, originals}) => {
 
 const mapStateToProps = state => {
     return {
-        trends: state.trends,
+        myList: state.myList,
         originals: state.originals
     }
 }
