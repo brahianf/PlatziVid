@@ -1,23 +1,35 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import playIcon from '../assets/static/play-icon.png'
-import plusIcon from '../assets/static/plus-icon.png'
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { setFavorite } from '../actions'
+import playIcon from '../assets/static/play-icon.png';
+import plusIcon from '../assets/static/plus-icon.png';
 
-const CarouselItem =  ({cover, title, year, contentRating, duration}) => (
-    <div className="carousel__item">
-        <img className="carousel-item__img" src={cover} alt={title}/>
-        <div className="carousel-item__details">
-            <div>
-                <img src={playIcon}/>
-                <img src={plusIcon}/>
+const CarouselItem =  (props) => {
+    const {cover, title, year, contentRating, duration} = props;
+    const handleSetFavorite = () => {
+        props.setFavorite(
+            cover, title, year, contentRating, duration
+        )
+    }
+    return (
+        <div className="carousel__item">
+            <img className="carousel-item__img" src={cover} alt={title}/>
+            <div className="carousel-item__details">
+                <div>
+                    <img src={playIcon}/>
+                    <img src={plusIcon}
+                        onClick={handleSetFavorite}
+                    />
+                </div>
+                <p className="carousel-item__details--title">{title}</p>
+                <p className="carousel-item__details--subtitle">
+                    {`${year} ${contentRating} ${duration}`}
+                </p>
             </div>
-            <p className="carousel-item__details--title">{title}</p>
-            <p className="carousel-item__details--subtitle">
-                {`${year} ${contentRating} ${duration}`}
-            </p>
         </div>
-    </div>
-)
+    );
+};
 
 CarouselItem.propTypes = {
     cover: PropTypes.string,
@@ -27,4 +39,8 @@ CarouselItem.propTypes = {
     duration: PropTypes.number
 }
 
-export default CarouselItem;
+const mapDispatchToProps = {
+    setFavorite,
+}
+
+export default connect(null, mapDispatchToProps)(CarouselItem)
